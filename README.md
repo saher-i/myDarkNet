@@ -17,8 +17,8 @@ cmake --build . --target install --parallel 8
 
 Step 2:
 
---> Installing requirements necessary for running the code on a GCP instance.
---> A few modifications were made in the code base.
+    --> Installing requirements necessary for running the code on a GCP instance.
+    --> A few modifications were made in the code base.
 
 Step 3:
 
@@ -28,11 +28,11 @@ perf record -g ./darknet detector train /home/si2443/darknet/cfg/coco.data /home
 ```
 Results obtained were as follows:
 
---> Shortcut Layers - 0.001 BF
---> Max Layer (5x5, 9x9, 13x13 kernels) - 0.005 to 0.031 BF
---> 1x1 Convolution Layers (~0.095 to ~0.379 BF)
---> 3x3 Convolution Layers (~1.703 BF)
---> Higher Dimension Convolution Layers (~3.407 BF)
+    --> Shortcut Layers - 0.001 BF
+    --> Max Layer (5x5, 9x9, 13x13 kernels) - 0.005 to 0.031 BF
+    --> 1x1 Convolution Layers (~0.095 to ~0.379 BF)
+    --> 3x3 Convolution Layers (~1.703 BF)
+    --> Higher Dimension Convolution Layers (~3.407 BF)
 
 The above numbers represent approximate figures for each layer.
 
