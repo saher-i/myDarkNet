@@ -4,15 +4,16 @@ The project is basedon YOLOv4 instead of YOLOv3 because of the constraints in ru
 
 The following steps were taken to run the code and get the results:
 
-```
 Step 1:
 
+```
 git clone https://github.com/AlexeyAB/darknet
 cd darknet
 mkdir build_release
 cd build_release
 cmake ..
 cmake --build . --target install --parallel 8
+```
 
 Step 2:
 
@@ -22,9 +23,9 @@ Step 2:
 Step 3:
 
 Profilling was done in terms of measuring BFLOPS (billion floating-point operations per second) using the follwing command:
-
+```
 perf record -g ./darknet detector train /home/si2443/darknet/cfg/coco.data /home/si2443/darknet/cfg/yolov4.cfg yolov4.conv.137
-
+```
 Results obtained were as follows:
 
 --> Shortcut Layers - 0.001 BF
@@ -40,9 +41,9 @@ Total BFLOPS obtained were 128.459
 Mini_batch = 8, batch = 64, time_steps = 1, train = 1: Indicates that the model was being trained with a mini-batch size of 8, a batch size of 64, and a single time step for recurrent connections (if any). The training flag is set to 1, meaning that the model is in training mode.
 
 By running the command:
-
+```
 perf report
-
+```
 I could better visualise the profiling results.
 
 Step 4:
@@ -50,7 +51,7 @@ Step 4:
 As convolution operation was taking the most time, I wanted to dig deep into the convolution_layer.c code and added print statements to see which parts of the code was taking the most time. I started with the forward_convolution_layer function. 
 
 In order to run my code and get the debug statemts printed, I used the follwing command:
-
+```
 ./darknet detector test /home/si2443/darknet/cfg/coco.data /home/si2443/darknet/cfg/yolov4.cfg /home/si2443/darknet/yolov4_weights/yolov4.weights -thresh 0.25
 
 ```
