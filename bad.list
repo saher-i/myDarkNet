@@ -1,0 +1,8 @@
+/home/aj3232/darknet/data/eagle.jpg
+Total BFLOPS 128.459 
+avg_outputs = 1068395 
+Loading weights from /home/aj3231/darknet/yolov4.weights...
+ seen 64, trained: 0 K-images (0 Kilo-batches_64) 
+Done! Loaded 0 layers from weights-file 
+Enter Image Path: /home/aj3232/darknet/data/eagle.jpg
+Cannot load image "/home/aj3232/darknet/data/eagle.jpg"
