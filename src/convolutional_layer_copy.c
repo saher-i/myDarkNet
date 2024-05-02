@@ -588,8 +588,6 @@ convolutional_layer make_convolutional_layer(int batch, int steps, int h, int w,
     if (train) l.delta = (float*)xcalloc(total_batch*l.outputs, sizeof(float));
 #endif  // not GPU
 
-    printf("Make_Cov_Layer\n");
-    
     l.forward = forward_convolutional_layer;
     l.backward = backward_convolutional_layer;
     l.update = update_convolutional_layer;
@@ -1206,16 +1204,23 @@ size_t binary_transpose_align_input(int k, int n, float *b, char **t_bit_input, 
 void forward_convolutional_layer(convolutional_layer l, network_state state)
 {
     
+    printf("Hi, I am inside the forward_convolution_layer\n");
+    
     clock_t start, end; // Declare variables to hold start and end times
     double cpu_time_used;
     start = clock();
-   // printf("Hi, I am inside forward_convolutional_layer!\n");
+
     int out_h = convolutional_out_height(l);
     int out_w = convolutional_out_width(l);
     int i, j;
 
     fill_cpu(l.outputs*l.batch, 0, l.output, 1);
 
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time to calculate output dimensions and initialize output: %f seconds\n", cpu_time_used);
+
+    start = clock();
     if (l.xnor && (!l.align_bit_weights || state.train)) {
         if (!l.align_bit_weights || state.train) {
             binarize_weights(l.weights, l.n, l.nweights, l.binary_weights);
@@ -1224,13 +1229,22 @@ void forward_convolutional_layer(convolutional_layer l, network_state state)
         binarize_cpu(state.input, l.c*l.h*l.w*l.batch, l.binary_input);
         state.input = l.binary_input;
     }
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time for binarization and swapping: %f seconds\n", cpu_time_used);
 
+    start = clock();
     int m = l.n / l.groups;
     int k = l.size*l.size*l.c / l.groups;
     int n = out_h*out_w;
 
     static int u = 0;
     u++;
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time to compute M, K, N: %f seconds\n", cpu_time_used);
+
+    start = clock();
     for(i = 0; i < l.batch; ++i)
     {
         for (j = 0; j < l.groups; ++j)
@@ -1320,12 +1334,24 @@ void forward_convolutional_layer(convolutional_layer l, network_state state)
             }
         }
     }
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time for main convolution loop: %f seconds\n", cpu_time_used);
+	
+    start = clock();
     if(l.batch_normalize){
         forward_batchnorm_layer(l, state);
     }
     else {
         add_bias(l.output, l.biases, l.batch, l.n, out_h*out_w);
     }
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time for batch normalization or bias addition: %f seconds\n", cpu_time_used);
+
+
+    start = clock();
 
     if (l.activation == SWISH) activate_array_swish(l.output, l.outputs*l.batch, l.activation_input, l.output);
     else if (l.activation == MISH) activate_array_mish(l.output, l.outputs*l.batch, l.activation_input, l.output);
@@ -1335,8 +1361,23 @@ void forward_convolutional_layer(convolutional_layer l, network_state state)
     else if (l.activation == NORM_CHAN_SOFTMAX_MAXVAL) activate_array_normalize_channels_softmax(l.output, l.outputs*l.batch, l.batch, l.out_c, l.out_w*l.out_h, l.output, 1);
     else activate_array_cpu_custom(l.output, l.outputs*l.batch, l.activation);
 
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time for activation function: %f seconds\n", cpu_time_used);
+
+    start = clock();
     if(l.binary || l.xnor) swap_binary(&l);
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time for binary or xnor swap: %f seconds\n", cpu_time_used);
+
+    start = clock();
     if(l.assisted_excitation && state.train) assisted_excitation_forward(l, state);
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time for assisted excitation: %f seconds\n", cpu_time_used);
+
+    start = clock();
     if (l.antialiasing) {
         network_state s = { 0 };
         s.train = state.train;
@@ -1348,7 +1389,7 @@ void forward_convolutional_layer(convolutional_layer l, network_state state)
     }
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-   // printf("Time taken to complete the forward_convolutional_function is: %f seconds\n", cpu_time_used);
+    printf("Time for antialiasing: %f seconds\n", cpu_time_used);
 }
 
 
@@ -1462,13 +1503,6 @@ void assisted_excitation_forward(convolutional_layer l, network_state state)
 
 void backward_convolutional_layer(convolutional_layer l, network_state state)
 {
-    printf("\n");
-    printf("Hi, I am inside the backward_convolution_layer\n");
-    
-    clock_t start, end; // Declare variables to hold start and end times
-    double cpu_time_used;
-    start = clock();
-    
     int i, j;
     int m = l.n / l.groups;
     int n = l.size*l.size*l.c / l.groups;
@@ -1518,3 +1552,103 @@ void backward_convolutional_layer(convolutional_layer l, network_state state)
 
                 //col2im_cpu(state.workspace, l.c / l.groups, l.h, l.w, l.size, l.stride,
                 //     l.pad, state.delta + (i*l.groups + j)*l.c / l.groups*l.h*l.w);
+
+                col2im_cpu_ext(
+                    state.workspace,        // input
+                    l.c / l.groups,         // input channels (h, w)
+                    l.h, l.w,               // input size (h, w)
+                    l.size, l.size,         // kernel size (h, w)
+                    l.pad * l.dilation, l.pad * l.dilation,           // padding (h, w)
+                    l.stride_y, l.stride_x,     // stride (h, w)
+                    l.dilation, l.dilation, // dilation (h, w)
+                    state.delta + (i*l.groups + j)* (l.c / l.groups)*l.h*l.w); // output (delta)
+            }
+        }
+    }
+}
+
+void update_convolutional_layer(convolutional_layer l, int batch, float learning_rate_init, float momentum, float decay)
+{
+    float learning_rate = learning_rate_init*l.learning_rate_scale;
+    //float momentum = a.momentum;
+    //float decay = a.decay;
+    //int batch = a.batch;
+
+    axpy_cpu(l.nweights, -decay*batch, l.weights, 1, l.weight_updates, 1);
+    axpy_cpu(l.nweights, learning_rate / batch, l.weight_updates, 1, l.weights, 1);
+    scal_cpu(l.nweights, momentum, l.weight_updates, 1);
+
+    axpy_cpu(l.n, learning_rate / batch, l.bias_updates, 1, l.biases, 1);
+    scal_cpu(l.n, momentum, l.bias_updates, 1);
+
+    if (l.scales) {
+        axpy_cpu(l.n, learning_rate / batch, l.scale_updates, 1, l.scales, 1);
+        scal_cpu(l.n, momentum, l.scale_updates, 1);
+    }
+}
+
+
+
+image get_convolutional_weight(convolutional_layer l, int i)
+{
+    int h = l.size;
+    int w = l.size;
+    int c = l.c / l.groups;
+    return float_to_image(w, h, c, l.weights + i*h*w*c);
+}
+
+void rgbgr_weights(convolutional_layer l)
+{
+    int i;
+    for (i = 0; i < l.n; ++i) {
+        image im = get_convolutional_weight(l, i);
+        if (im.c == 3) {
+            rgbgr_image(im);
+        }
+    }
+}
+
+void rescale_weights(convolutional_layer l, float scale, float trans)
+{
+    int i;
+    for (i = 0; i < l.n; ++i) {
+        image im = get_convolutional_weight(l, i);
+        if (im.c == 3) {
+            scale_image(im, scale);
+            float sum = sum_array(im.data, im.w*im.h*im.c);
+            l.biases[i] += sum*trans;
+        }
+    }
+}
+
+image *get_weights(convolutional_layer l)
+{
+    image *weights = (image *)xcalloc(l.n, sizeof(image));
+    int i;
+    for (i = 0; i < l.n; ++i) {
+        weights[i] = copy_image(get_convolutional_weight(l, i));
+        normalize_image(weights[i]);
+        /*
+        char buff[256];
+        sprintf(buff, "filter%d", i);
+        save_image(weights[i], buff);
+        */
+    }
+    //error("hey");
+    return weights;
+}
+
+image *visualize_convolutional_layer(convolutional_layer l, char *window, image *prev_weights)
+{
+    image *single_weights = get_weights(l);
+    show_images(single_weights, l.n, window);
+
+    image delta = get_convolutional_image(l);
+    image dc = collapse_image_layers(delta, 1);
+    char buff[256];
+    sprintf(buff, "%s: Output", window);
+    show_image(dc, buff);
+    //save_image(dc, buff);
+    free_image(dc);
+    return single_weights;
+}
