@@ -55,3 +55,12 @@ In order to run my code and get the debug statements printed, I used the follwin
 ./darknet detector test /home/si2443/darknet/cfg/coco.data /home/si2443/darknet/cfg/yolov4.cfg /home/si2443/darknet/yolov4_weights/yolov4.weights -thresh 0.25
 
 ```
+
+Step 5:
+
+To observe the time taken by the backward and update convolution functions, I had to use the Yolov4 time weights and ran
+the training for the following command:
+
+```
+./darknet detector train cfg/coco.data cfg/yolov4-tiny-custom.cfg yolov4-tiny.conv.29
+```
