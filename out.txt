@@ -1,0 +1,204 @@
+GPU isn't used 
+yolov4-tiny-custom
+mini_batch = 64, batch = 64, time_steps = 1, train = 1 
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+nms_kind: greedynms (1), beta = 0.600000 
+Make_Cov_Layer
+Make_Cov_Layer
+Make_Cov_Layer
+nms_kind: greedynms (1), beta = 0.600000 
+
+ seen 64, trained: 0 K-images (0 Kilo-batches_64) 
+Weights are saved after: 10000 iterations. Last weights (*_last.weight) are stored every 100 iterations. 
+Learning Rate: 0.00261, Momentum: 0.9, Decay: 0.0005
+ Detection layer: 30 - type = 28 
+ Detection layer: 37 - type = 28 
+Loaded: 0.745598 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 1.938657 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 4.368899 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 8.585816 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 2.432401 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 2.413446 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 1.443453 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 8.068122 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 2.134504 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 2.157361 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 1.138378 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 7.893590 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 2.044761 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 2.038388 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 0.987440 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 8.010080 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 0.467259 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 3.969639 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 0.431664 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 0.126005 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 12.256426 seconds
+Hi, I am inside forward_convolutional_layer!
+Time taken to complete the forward_convolutional_function is: 0.897612 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 1.683928 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 22.217667 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 0.231033 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 0.838945 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 7.410097 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 0.848662 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 16.211466 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 1.717733 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 3.742518 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 3.767652 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 14.947657 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 2.112731 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 4.036031 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 3.966057 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 15.655973 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 2.287418 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 4.619833 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 4.719889 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 16.953536 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 8.592742 seconds
+
+Hi, I am inside the backward_convolution_layer
+Time taken to complete the backward_convolution_layer function is : 1.667583 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000004 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000034 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000057 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000027 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000016 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000008 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000239 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000060 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000076 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000029 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000915 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000177 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000182 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000106 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.004220 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000187 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.002024 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000165 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000052 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.001597 seconds
+
+Hi, I am inside the update_convolution_layer
+Time taken to complete update_convolutional_layer function is: 0.000076 seconds
+[H[J1/500200: loss=427.0 hours left=-1.0
+ 1: 426.969482, 426.969482 avg loss, 0.000000 rate, 203.420812 seconds, 64 images, -1.000000 hours left
+
