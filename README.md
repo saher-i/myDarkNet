@@ -22,7 +22,7 @@ Step 2:
 
 Step 3:
 
-Profilling was done in terms of measuring BFLOPS (billion floating-point operations per second) using the follwing command:
+Profiling was done in terms of measuring BFLOPS (billion floating-point operations per second) using the following command:
 ```
 perf record -g ./darknet detector train /home/si2443/darknet/cfg/coco.data /home/si2443/darknet/cfg/yolov4.cfg yolov4.conv.137
 ```
