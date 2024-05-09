@@ -50,7 +50,7 @@ Step 4:
 
 As convolution operation was taking the most time, I wanted to dig deep into the convolution_layer.c code and added print statements to see which parts of the code was taking the most time. I started with the forward_convolution_layer function. 
 
-In order to run my code and get the debug statements printed, I used the follwing command:
+In order to run my code and get the debug statements printed, I used the following command:
 ```
 ./darknet detector test /home/si2443/darknet/cfg/coco.data /home/si2443/darknet/cfg/yolov4.cfg /home/si2443/darknet/yolov4_weights/yolov4.weights -thresh 0.25
 
