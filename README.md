@@ -58,7 +58,7 @@ In order to run my code and get the debug statements printed, I used the followi
 
 Step 5:
 
-To observe the time taken by the backward and update convolution functions, I had to use the Yolov4 time weights and ran
+To observe the time taken by the backward and update convolution functions, I had to use the Yolov4 weights and ran
 the training for the following command:
 
 ```
